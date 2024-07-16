@@ -1,0 +1,30 @@
+#Get list of categorical variables
+s = (data.dtypes == 'object')
+object_cols = list(s[s].index)
+
+print("Categorical variables in the dataset:", object_cols)
+
+
+
+#Label Encoding the object dtypes.
+LE=LabelEncoder()
+for i in object_cols:
+    data[i]=data[[i]].apply(LE.fit_transform)
+    
+print("All features are now numerical")
+
+
+#Creating a copy of data
+ds = data.copy()
+# creating a subset of dataframe by dropping the features on deals accepted and promotions
+cols_del = ['AcceptedCmp3', 'AcceptedCmp4', 'AcceptedCmp5', 'AcceptedCmp1','AcceptedCmp2', 'Complain', 'Response']
+ds = ds.drop(cols_del, axis=1)
+#Scaling
+scaler = StandardScaler()
+scaler.fit(ds)
+scaled_ds = pd.DataFrame(scaler.transform(ds),columns= ds.columns )
+print("All features are now scaled")
+
+#Scaled data to be used for reducing the dimensionality
+print("Dataframe to be used for further modelling:")
+scaled_ds.head()

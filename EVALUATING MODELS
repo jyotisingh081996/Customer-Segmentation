@@ -1,0 +1,38 @@
+#Plotting countplot of clusters
+pal = ["#682F2F","#B9C0C9", "#9F8A78","#F3AB60"]
+pl = sns.countplot(x=data["Clusters"], palette= pal)
+pl.set_title("Distribution Of The Clusters")
+plt.show()
+
+
+
+pl = sns.scatterplot(data = data,x=data["Spent"], y=data["Income"],hue=data["Clusters"], palette= pal)
+pl.set_title("Cluster's Profile Based On Income And Spending")
+plt.legend()
+plt.show()
+
+
+plt.figure()
+pl=sns.swarmplot(x=data["Clusters"], y=data["Spent"], color= "#CBEDDD", alpha=0.5 )
+pl=sns.boxenplot(x=data["Clusters"], y=data["Spent"], palette=pal)
+plt.show()
+
+
+
+#Creating a feature to get a sum of accepted promotions 
+data["Total_Promos"] = data["AcceptedCmp1"]+ data["AcceptedCmp2"]+ data["AcceptedCmp3"]+ data["AcceptedCmp4"]+ data["AcceptedCmp5"]
+#Plotting count of total campaign accepted.
+plt.figure()
+pl = sns.countplot(x=data["Total_Promos"],hue=data["Clusters"], palette= pal)
+pl.set_title("Count Of Promotion Accepted")
+pl.set_xlabel("Number Of Total Accepted Promotions")
+plt.show()
+
+
+
+
+#Plotting the number of deals purchased
+plt.figure()
+pl=sns.boxenplot(y=data["NumDealsPurchases"],x=data["Clusters"], palette= pal)
+pl.set_title("Number of Deals Purchased")
+plt.show()

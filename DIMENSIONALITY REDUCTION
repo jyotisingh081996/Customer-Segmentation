@@ -1,0 +1,18 @@
+#Initiating PCA to reduce dimentions aka features to 3
+pca = PCA(n_components=3)
+pca.fit(scaled_ds)
+PCA_ds = pd.DataFrame(pca.transform(scaled_ds), columns=(["col1","col2", "col3"]))
+PCA_ds.describe().T
+
+
+#A 3D Projection Of Data In The Reduced Dimension
+x =PCA_ds["col1"]
+y =PCA_ds["col2"]
+z =PCA_ds["col3"]
+#To plot
+fig = plt.figure(figsize=(10,8))
+ax = fig.add_subplot(111, projection="3d")
+ax.scatter(x,y,z, c="maroon", marker="o" )
+ax.set_title("A 3D Projection Of Data In The Reduced Dimension")
+plt.show()
+

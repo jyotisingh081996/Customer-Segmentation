@@ -1,0 +1,6 @@
+Personal = [ "Kidhome","Teenhome","Customer_For", "Age", "Children", "Family_Size", "Is_Parent", "Education","Living_With"]
+
+for i in Personal:
+    plt.figure()
+    sns.jointplot(x=data[i], y=data["Spent"], hue =data["Clusters"], kind="kde", palette=pal)
+    plt.show()
